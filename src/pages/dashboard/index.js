@@ -11,14 +11,18 @@ const people = [
 
   import endPoints from "@services/api";
   import useFetch from "@hooks/useFetch";
+  import Pagination from '@common/Pagination';
+  import { useState } from 'react';
 
   const PRODUCT_LIMIT = 5;
-  const PRODUCT_OFFSET = 5;
+  const PRODUCT_OFFSET = 0;
 
   
   export default function Dashboard() {
-    const products = useFetch(endPoints.products.getProducts(PRODUCT_LIMIT, PRODUCT_OFFSET));
-    console.log(products);
+    const [offset, setOffset] = useState(PRODUCT_OFFSET);
+
+    const products = useFetch(endPoints.products.getProducts(PRODUCT_LIMIT, offset));
+    const totalItems = useFetch(endPoints.products.getProducts(0, 0)).length;
     
     return (
       <>
@@ -86,6 +90,7 @@ const people = [
               </div>
             </div>
           </div>
+            { totalItems > 0 && <Pagination setOffset={setOffset} productNumberLimit={PRODUCT_LIMIT} totalItems={totalItems} />}
         </div>
       </>
     );
