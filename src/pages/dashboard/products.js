@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
 import {  PlusCircleIcon } from '@heroicons/react/24/solid';
 import Modal from '@common/Modal';
+import FormProduct from '@components/FormProduct';
 
 export default function products() {
     const [open, setOpen] = useState(false);
@@ -14,7 +15,7 @@ export default function products() {
             List of Products
           </h2>
         </div>
-        <div className="mt-5 flex lg:mt-0 lg:ml-4">
+        <div className="mt-5 pr-8 flex lg:mt-0 lg:ml-4 justify-end">
           <span className="sm:ml-3">
             <button
                 type="button"
@@ -93,7 +94,7 @@ export default function products() {
         </div>
       </div>
       <Modal open={open} setOpen={setOpen}>
-        <h1>Hola mundo</h1>
+        <FormProduct />
       </Modal>
     </>
   );
