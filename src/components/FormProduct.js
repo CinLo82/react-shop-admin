@@ -2,7 +2,7 @@ import { ProductSchema } from "@common/ProductSchema";
 import { useRef } from "react";
 import { addProduct } from "@services/api/product";
 
-export default function FormProduct( { setOpen, setAlert } ) {
+export default function FormProduct( { setOpen, setAlert, product } ) {
   const formRef = useRef(null);
 
   const handleSubmit = async (e) => {
@@ -50,6 +50,7 @@ export default function FormProduct( { setOpen, setAlert } ) {
                   Title
                 </label>
                 <input
+                  defaultValue={product?.title}
                   type="text"
                   name="title"
                   id="title"
@@ -64,6 +65,7 @@ export default function FormProduct( { setOpen, setAlert } ) {
                   Price
                 </label>
                 <input
+                  defaultValue={product?.price}
                   type="number"
                   name="price"
                   id="price"
@@ -78,6 +80,7 @@ export default function FormProduct( { setOpen, setAlert } ) {
                   Category
                 </label>
                 <select
+                  defaultValue={product?.category}
                   id="category"
                   name="category"
                   autoComplete="category-name"
@@ -99,6 +102,7 @@ export default function FormProduct( { setOpen, setAlert } ) {
                   Description
                 </label>
                 <textarea
+                  defaultValue={product?.description}
                   name="description"
                   id="description"
                   autoComplete="description"
@@ -134,6 +138,7 @@ export default function FormProduct( { setOpen, setAlert } ) {
                         >
                           <span>Upload a file</span>
                           <input
+                            defaultValue={product?.images}
                             id="images"
                             name="images"
                             type="file"
