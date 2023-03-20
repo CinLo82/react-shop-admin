@@ -1,6 +1,6 @@
 import { ProductSchema } from "@common/ProductSchema";
 import { useRef } from "react";
-import addProduct from "@services/api/product";
+import { addProduct } from "@services/api/product";
 
 export default function FormProduct( { setOpen, setAlert } ) {
   const formRef = useRef(null);
