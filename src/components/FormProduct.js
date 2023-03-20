@@ -1,10 +1,11 @@
+import { ProductSchema } from "@common/ProductSchema";
 import { useRef } from "react";
 
 export default function FormProduct() {
     const formRef = useRef(null);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         const formData = new FormData(formRef.current);
         const data = {
             title: formData.get('title'),
@@ -14,6 +15,8 @@ export default function FormProduct() {
             images:[ formData.get('images').name],
           };
           console.log(data);
+          const validation = await ProductSchema.validate(data);
+          console.log(validation);
     };
 
     return (
