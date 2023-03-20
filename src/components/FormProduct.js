@@ -1,9 +1,11 @@
 import { ProductSchema } from "@common/ProductSchema";
 import { useRef } from "react";
-import { addProduct } from "@services/api/product";
+import {Router, useRouter} from "next/router";
+import { addProduct, updateProduct } from "@services/api/product";
 
 export default function FormProduct( { setOpen, setAlert, product } ) {
   const formRef = useRef(null);
+  const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,24 +19,33 @@ export default function FormProduct( { setOpen, setAlert, product } ) {
     };
     const validation = await ProductSchema.validate(data);
       console.log(validation);
-      addProduct(data)
-        .then(() => {
-          setAlert({
-            active: true,
-            message: 'Product added successfully',
-            type: 'success',
-            autoClose: false,
+
+      if(product) {
+        updateProduct(product.id, data)
+          .then(() => {
+            router.push('/dashboard/products');
           });
-          setOpen(false);
-        })
-        .catch((error) => {
-          setAlert({
-            active: true,
-            message: error.message, 
-            type: 'error',
-            autoClose:false
+
+      } else {
+         addProduct(data)
+          .then(() => {
+            setAlert({
+              active: true,
+              message: 'Product added successfully',
+              type: 'success',
+              autoClose: false,
+            });
+            setOpen(false);
+          })
+          .catch((error) => {
+            setAlert({
+              active: true,
+              message: error.message, 
+              type: 'error',
+              autoClose:false
+            });
           });
-        });
+      }
   };
 
     return (
