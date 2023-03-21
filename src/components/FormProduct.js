@@ -1,11 +1,17 @@
 import { ProductSchema } from "@common/ProductSchema";
-import { useRef } from "react";
-import {Router, useRouter} from "next/router";
+import { useRef, useEffect } from "react";
+import { useRouter} from "next/router";
 import { addProduct, updateProduct } from "@services/api/product";
 
 export default function FormProduct( { setOpen, setAlert, product } ) {
   const formRef = useRef(null);
   const router = useRouter()
+
+  useEffect(() => {
+    const categoryTag = document.querySelector('#category');
+    categoryTag.value = product?.categoryId;
+  }, [product]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,6 +53,8 @@ export default function FormProduct( { setOpen, setAlert, product } ) {
           });
       }
   };
+
+
 
     return (
       <form ref={formRef} onSubmit={handleSubmit}>
@@ -91,7 +99,7 @@ export default function FormProduct( { setOpen, setAlert, product } ) {
                   Category
                 </label>
                 <select
-                  defaultValue={product?.category}
+                  defaultValue={product?.categoryId}
                   id="category"
                   name="category"
                   autoComplete="category-name"

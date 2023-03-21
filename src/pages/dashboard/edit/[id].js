@@ -15,7 +15,8 @@ export default function Edit() {
             const response = await axios.get(endPoints.products.getProduct(id));
             setProduct(response.data);
         }
-        getProduct();
+        getProduct()
+        .catch((error) => router.push('/notFound'));
     }, [router?.isReady]);
 
     return <FormProduct product={product}/>;

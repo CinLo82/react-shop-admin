@@ -2,6 +2,7 @@ import React, { useState, useContext, createContext } from 'react';
 import endPoints from '@services/api';
 import Cookie from 'js-cookie';
 import axios from 'axios';
+import Router from 'next/router';
 
 const authContext = createContext();
 
@@ -37,11 +38,18 @@ function useProviderAuth() {
     }
   };
 
+  const logout = () => {
+    Cookie.remove('token');
+    setUser(null);
+    delete axios.defaults.headers.Authorization;
+    Router.push('/login');
+  }
 
   return {
     user,
     error,
     setError,
     signIn,
+    logout,
   };
 }
