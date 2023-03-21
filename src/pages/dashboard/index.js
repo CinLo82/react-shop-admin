@@ -4,7 +4,7 @@ import { Chart } from '@common/Chart';
 import Pagination from '@common/Pagination';
 import { useState } from 'react';
 
-const PRODUCT_LIMIT = 5;
+const PRODUCT_LIMIT = 10;
 const PRODUCT_OFFSET = 0;
 
 export default function Dashboard() {

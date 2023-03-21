@@ -23,10 +23,10 @@ export default function FormProduct( { setOpen, setAlert, product } ) {
       categoryId: parseInt(formData.get('category')),
       images:[ formData.get('images').name],
     };
-    const validation = await ProductSchema.validate(data);
-      console.log(validation);
-
+   
       if(product) {
+      const validation = await ProductSchema.validate(data);
+      console.log(validation);  
         updateProduct(product.id, data)
           .then(() => {
             router.push('/dashboard/products');
@@ -41,7 +41,7 @@ export default function FormProduct( { setOpen, setAlert, product } ) {
               type: 'success',
               autoClose: false,
             });
-            setOpen(false);
+            setTimeout(closeWindow, 3000);
           })
           .catch((error) => {
             setAlert({

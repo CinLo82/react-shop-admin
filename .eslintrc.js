@@ -9,4 +9,8 @@ module.exporte = {
   rules: {
     semi: ['error', 'alwals'],
   },
+  parserOptions: {
+    'sourceType': "module",
+    'ecmaVersion': 2020
+  }
 };

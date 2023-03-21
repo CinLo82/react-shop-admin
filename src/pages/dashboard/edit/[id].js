@@ -19,5 +19,10 @@ export default function Edit() {
         .catch((error) => router.push('/notFound'));
     }, [router?.isReady]);
 
-    return <FormProduct product={product}/>;
+    return (
+        <>
+            <FormProduct product={product}/>;
+        </>
+    );
+    
 }
